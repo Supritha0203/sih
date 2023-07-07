@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/13a4479071.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="dashboard.css">
+    <title>Accepted HEI</title>
+</head>
+<body>
+
+    <header class="header">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="https://projectpay-home.my.canva.site/">ProjectPay</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="https://projectpay-home.my.canva.site/">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="appliedpro.html">Applied Projects</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="ongoingpro.html">Ongoing Projects</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="completedpro.html">Completed Projects</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="awardedpro.html">Awarded Projects</a>
+                  </li> 
+                  <li class="nav-item">
+                    <a class="nav-link" href="awardedpro.html">Create Post</a>
+                  </li> 
+                  <li class="nav-item">
+                    <a class="nav-link" href="awardedpro.html">Profile</a>
+                  </li> 
+                </ul>
+              </div>
+            </div>
+          </nav>
+    </header>
+
+    
+<section class="cards">
+    <section class="container">
+        <article class="accepted-list">
+          <section class="card">
+    
+            <article class="card-head">
+              <article class="logo">
+                <span>
+                  <img src="" alt="">
+                </span>
+              </article>
+              <article class="card-deadline">
+                <span id="deadline"></span>
+              </article>
+            </article>
+    
+            <article class="card-details">
+              <article class="name">
+                <h4 id="heiName">Name of HEI</h4>
+              </article>
+              <article class="prblm-statement">
+                <h4 id="ps">Problem Statement</h4>
+              </article>
+              <article class="psid">
+                <h3 id="psid">PSID</h3>
+              </article>
+            </article>
+    
+            <article class="estimated">
+              <article class="duration">
+                <h5 id="duration">estimated duration</h5>
+              </article>
+              <article class="budget">
+                <h5 id="budget">estimated budget</h5>
+              </article>
+            </article>
+    
+            <article class="view">
+              <div class="d-grid gap-2">
+                <button class="btn btn-primary" type="button">View Project</button>
+              </div>
+            </article>
+          </section>
+        </article>
+    
+        <article class="accepted-list">
+          <section class="card">
+    
+            <article class="card-head">
+              <article class="logo">
+                <span>
+                  <img src="" alt="">
+                </span>
+              </article>
+              <article class="card-deadline">
+                <p id="deadline"></p>
+              </article>
+            </article>
+    
+            <article class="card-details">
+              <article class="name">
+                <h4>Name of HEI</h4>
+              </article>
+              <article class="prblm-statement">
+                <h4>Problem Statement</h4>
+              </article>
+              <article class="psid">
+                <h3>PSID</h3>
+              </article>
+            </article>
+    
+            <article class="estimated">
+              <article class="duration">
+                <h5>estimated duration</h5>
+              </article>
+              <article class="budget">
+                <h5>estimated budget</h5>
+              </article>
+            </article>
+    
+            <article class="view">
+              <div class="d-grid gap-2">
+                <button class="btn btn-primary" type="button">View Project</button>
+              </div>
+            </article>
+          </section>
+        </article>
+      </section>
+
+</section>
+
+<script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-app.js";
+import { getFirestore, collection, getDocs, getDoc, doc,onSnapshot, setDoc, updateDoc} from "https://www.gstatic.com/firebasejs/9.9.1/firebase-firestore.js";
+var firebaseConfig = {
+    apiKey: "AIzaSyCYybtuNQHaMpcKNdTyjK_e0Y0k5xChMQI",
+
+  authDomain: "mgpa-6cc10.firebaseapp.com",
+
+  projectId: "mgpa-6cc10",
+
+  storageBucket: "mgpa-6cc10.appspot.com",
+
+  messagingSenderId: "292918906000",
+
+  appId: "1:292918906000:web:69bf0126437f9ea2abdc15"
+
+  };
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const fire=getFirestore(app)
+  var stat;
+  async function getData(){
+  const querySnapshot = await getDocs(collection(fire, "apply"));
+querySnapshot.forEach((doc) => {
+  console.log(doc.id, " => ", doc.data().Milestones); 
+stat=doc.data().Status
+console.log(stat)
+try {
+  if(stat=="To be Verified"){
+  getItems(doc) ;
+}
+} catch (error) {
+  console.log(error)
+}
+
+  });
+}
+
+async function getItems(doc){
+    console.log("this")
+    //document.getElementById('deadline').textContent=doc.data().description
+    var a=document.getElementById('deadline')
+    console.log(a)
+}
+window.onload=getData
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+    crossorigin="anonymous"></script>
+    
+</body>
+</html>
